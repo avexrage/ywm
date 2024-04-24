@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\LoginController;
+
+use App\Http\Controllers\FormController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,5 +17,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('mainlayout');
+    return view('layouts.landingpage');
 });
+
+Route::get('data', function () {
+    return view('admin.index');
+});
+
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+
+Route::get('pilihan-program', function (){
+    return view('layouts.pilihanprogram');
+});
+
+Route::get('form', [FormController::class, 'create'])->name('form.create');
+
+Route::post('form', [FormController::class, 'store'])->name('form.store');
+
