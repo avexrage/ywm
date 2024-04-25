@@ -10,38 +10,53 @@
 </head>
 <body>
   <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-body-light fixed-top navbar-white">
-        <div class="container-fluid">
-            <a><img src="{{ asset('ikon/ywm.jpg') }}" alt="Yayasan Wredha Mulya Logo" width="70" height="64" class="me-auto"></a>
-            <a class="navbar-brand navbar-brand-vertical text-success custom-margin" href="/#beranda">
-                <span class="brand-top">Yayasan</span>
-                <span class="brand-bottom">Wredha Mulya</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav"> 
-                    <li class="nav-item">
-                        <a class="nav-link text-success" href="/#program">Program</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link  text-success" href="/#fasilitas">Fasilitas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link  text-success" href="/#kontakkami">Kontak Kami</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link  text-success" href="/pilihan-program">Pendaftaran</a>
-                    </li>
-                </ul> 
-            </div>
-            <div class="button-container">
+  <nav class="navbar navbar-expand-lg bg-body-light fixed-top navbar-white">
+    <div class="container-fluid">
+        <a><img src="{{ asset('ikon/ywm.jpg') }}" alt="Yayasan Wredha Mulya Logo" width="70" height="64" class="me-auto"></a>
+        <a class="navbar-brand navbar-brand-vertical text-success custom-margin" href="/#beranda">
+            <span class="brand-top">Yayasan</span>
+            <span class="brand-bottom">Wredha Mulya</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav"> 
+                <li class="nav-item">
+                    <a class="nav-link text-success" href="/#program">Program</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-success" href="/#fasilitas">Fasilitas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-success" href="/#kontakkami">Kontak Kami</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-success" href="/pilihan-program">Pendaftaran</a>
+                </li>
+            </ul> 
+        </div>
+        <div class="button-container">
+            @guest
                 <button type="button" class="btn btn-success btn-fixed" onclick="window.location='{{ route('login') }}'">Login</button>
                 <button type="button" class="btn btn-outline-success btn-fixed">Register</button>
-            </div>
+            @endguest
+            @auth
+                <div class="dropdown">
+                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-user"></i> {{ Auth::user()->email }}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item">Level: {{ Auth::user()->role }}</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"><i class="fa fa-power-off"></i> Log Out</a></li>
+                    </ul>
+                </div>
+            @endauth
         </div>
-    </nav>
+    </div>
+</nav>
+
 <div id="main-content">
     @yield('content1')
         <div class="pt-5 mt-5">

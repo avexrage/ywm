@@ -5,6 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 
 use App\Http\Controllers\FormController;
+
+use App\Http\Controllers\RegisterController;
+
+use App\Http\Controllers\HomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,22 +20,26 @@ use App\Http\Controllers\FormController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('layouts.landingpage');
-});
+//HOME
+Route::get('/', [HomeController::class, 'landingPage'])->name('home');
 
 Route::get('data', function () {
     return view('admin.index');
 });
 
+//LOGIN
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('actionlogin', [LoginController::class, 'actionlogin'])->name('actionlogin');
 
+
+//REGISTER
+Route::get('register', [RegisterController::class, 'register'])->name('register');
+Route::post('register/action', [RegisterController::class, 'actionregister'])->name('actionregister');
 Route::get('pilihan-program', function (){
     return view('layouts.pilihanprogram');
 });
 
+//FORM
 Route::get('form', [FormController::class, 'create'])->name('form.create');
-
 Route::post('form', [FormController::class, 'store'])->name('form.store');
 
