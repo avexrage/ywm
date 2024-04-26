@@ -26,37 +26,29 @@ class LoginController extends Controller
     }
 
     public function actionlogin(Request $request)
-{
-    $request->validate([
-        'identifier' => [
-            'required', 
-            'regex:/^([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+|0[1-9][0-9]{7,13})$/'
-        ],[
-            'identifier.required' => 'Email atau Nomor HP harus diisi!',
-            'identifier.regex' => 'Masukkan format Email yang valid atau Nomor HP Indonesia tanpa tanda +'
-        ]
-    ]);
+    {
+        Session::flash('email', $request->email);
+        
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+            ],[
+                'email.required' => 'Email wajib diisi!',
+                'password.required' => 'Password wajib diisi!'
+            ]);
+        $infoLogin =[
+            'email' => $request->email,
+            'password' => $request->password
+        ];
 
-    $identifier = $request->input('identifier');
-    $user = null;
-
-    // Cek apakah input adalah email atau nomor HP dan mencari user berdasarkan itu
-    if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
-        $user = User::where('email', $identifier)->first();
-    } else {
-        $user = User::where('no_hp', $identifier)->first();
+        if(Auth::attempt($infoLogin)){
+            //otentikasi sukses
+            return redirect('/')->with('succes', 'Selamat Anda Berhasil Login');
+        }else{
+            //otentikasi gagal
+            return redirect('sesi')->withErrors(['Password yang dimasukkan tidak valid']);
+        }
     }
-
-    if ($user) {
-        // Manually login the user without password
-        Auth::login($user); // Login the user
-        return redirect()->intended('/'); // Redirect to intended page or default to 'home'
-    } else {
-        Session::flash('error', 'Akun tidak ditemukan dengan data yang dimasukkan');
-        return redirect('login');
-    }
-}
-
 
     public function actionlogout()
     {

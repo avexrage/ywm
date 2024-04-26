@@ -23,13 +23,13 @@ use App\Http\Controllers\HomeController;
 //HOME
 Route::get('/', [HomeController::class, 'landingPage'])->name('home');
 
-Route::get('data', function () {
+Route::get('/data', function () {
     return view('admin.index');
 });
 
 //LOGIN
-Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('actionlogin', [LoginController::class, 'actionlogin'])->name('actionlogin');
+Route::get('/sesi', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/sesi/login', [LoginController::class, 'actionlogin'])->name('actionlogin');
 
 
 //REGISTER

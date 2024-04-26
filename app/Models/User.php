@@ -21,13 +21,13 @@ class User extends Authenticatable
     protected $primaryKey = 'id_user';
     protected $fillable = [
         'id_user',
-        'nama',
         'email',
+        'password',
+        'nama',
         'no_hp',
         'alamat',
         'pekerjaan',
         'role',
-        'verify_key'
     ];
 
     /**
@@ -48,4 +48,5 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
 }
