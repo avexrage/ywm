@@ -8,9 +8,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="bg-light">
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg bg-body-light fixed-top navbar-white">
+  <nav class="navbar navbar-expand-lg bg-body-light fixed-top navbar-white shadow-sm">
     <div class="container-fluid">
         <a><img src="{{ asset('ikon/ywm.jpg') }}" alt="Yayasan Wredha Mulya Logo" width="70" height="64" class="me-auto"></a>
         <a class="navbar-brand navbar-brand-vertical text-success custom-margin" href="/#beranda">
@@ -37,26 +37,51 @@
             </ul> 
         </div>
         <div class="button-container">
+            @guest
                 <button type="button" class="btn btn-success btn-fixed" onclick="window.location='{{ route('login') }}'">Login</button>
-                <button type="button" class="btn btn-outline-success btn-fixed">Register</button> 
+                <button type="button" class="btn btn-outline-success btn-fixed" onclick="window.location='{{ route('register') }}'">Register</button>
+            @endguest
+            @auth
+                <div class="dropdown">
+                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-user"></i> {{ Auth::user()->email }}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item">Riwayat</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa fa-power-off"></i> Log Out</a></li>
+                    </ul>
+                </div>
+            @endauth
         </div>
     </div>
 </nav>
-
-<div id="main-content">
-    @yield('content1')
-        <div class="pt-5 mt-5">
-            @yield('content2')
-                <div class="mt-1">
-                @yield('content3')
-                    <div class="mt-1">
-                    @yield('content4')
-                        <div class="mt-1">
-                            @yield('content0')
-                </div>
-            </div>
+<!-- Logout Confirmation Modal -->
+<div class="modal" tabindex="-1" id="logoutModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirm Logout</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body">
+          <p>Apakah Anda ingin logout?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+          <a href="{{ route('actionlogout') }}" class="btn btn-success">Ya</a>
+        </div>
+      </div>
     </div>
+  </div>
+  
+<div id="main-content" class="pt-5 mt-5">
+    @yield('content1')
+    @yield('content2')
+    @yield('content3')
+    @yield('content4')
+    @yield('content0')
+    @yield('content00')
 </div>
 
 <!-- Kontak Kami -->
@@ -82,9 +107,7 @@
                 <div class="map-container flex-grow-1">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.1607269115775!2d110.36800507500483!3d-7.772775492246635!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a58490c876c3b%3A0x9fff4c9758d746cc!2sYayasan%20Wredha%20Mulya%20Yogyakarta!5e0!3m2!1sid!2sid!4v1712739229389!5m2!1sid!2sid" frameborder="0" style="width: 100%; height: 100%;" allowfullscreen="" aria-hidden="false" tabindex="0"> </iframe>
                 </div>
-                <div id="teks-alamat" class="ms-3">
-                Jl. Sendowo B G, RT.13/RW.56, Sendowo, Sinduadi, Kec. Mlati, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281
-                </div>
+                
             </div>
         </div>
       <p class="text-center text-body-secondary ">&copy; 2024 Created by Maulana Faris</p>

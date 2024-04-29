@@ -27,7 +27,10 @@ class User extends Authenticatable
         'no_hp',
         'alamat',
         'pekerjaan',
-        'role',
+        'role'
+    ];
+    protected $attributes = [
+        'role' => 'user',
     ];
 
     /**

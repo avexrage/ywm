@@ -1,8 +1,8 @@
 @extends('layouts.mainlayout')
-
 @section('title', 'Pilihan Program')
-
 @section('content2')
+@include('layouts.pesan')
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-6 mb-3 mb-sm-0">

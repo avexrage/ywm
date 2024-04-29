@@ -58,8 +58,8 @@ class FormController extends Controller
         $request->validate([
             'nama' => 'required|string|max:50',
             'ktp' => 'required|string|size:16|unique:data_peserta,id_peserta',
-            'alamat' => 'required|string|max:150',
-            'tlahir' => 'required|string|max:30',
+            'alamat' => 'required|string',
+            'tlahir' => 'required|string',
             'tgllhr'  => 'required|date',
             'kelamin'  => 'required|string|in:' . implode(',', array_column(Kelamin::cases(), 'value')),
             'agama' => 'required|string|in:' . implode(',', array_column(Agama::cases(), 'value')),

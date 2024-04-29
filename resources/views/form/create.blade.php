@@ -1,20 +1,6 @@
 @extends('layouts.mainlayout')
-
 @section('title', 'Formulir Pendaftaran')
-
 @section('content3')
-
-@if ($errors->any())
-<div class="pt-1">
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $item)
-                <li>{{ $item }}</li>
-            @endforeach
-        </ul>
-    </div>
-</div>
-@endif
 
 <body class="bg-light" >
 <div class="container text-success">
@@ -22,6 +8,7 @@
 </div>
 <main class="container text-success">
 <!-- START FORM -->
+@include('layouts.pesan')
 <form action="{{ route('form.store') }}" method="POST">
 @csrf
 <input type="hidden" name="program" value="{{ $program }}">
@@ -38,7 +25,7 @@
     <div class="mb-3 row">
         <label for="ktp" class="col-sm-2 col-form-label">Nomor KTP</label>
         <div class="col-sm-10">
-            <input type="number" class="form-control" name='ktp' value="{{ Session::get('id_peserta') }}" id="ktp" style="text-transform: capitalize;">
+            <input type="string" class="form-control" name='ktp' value="{{ Session::get('id_peserta') }}" id="ktp" style="text-transform: capitalize;">
         </div>
     </div>
     <div class="mb-3 row">

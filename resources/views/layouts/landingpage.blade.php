@@ -1,8 +1,8 @@
 @extends('layouts.mainlayout')
-
 @section('title', 'Beranda')
-
 @section('content1')
+@include('layouts.pesan')
+
   <!-- Beranda -->
   <section class="beranda" id="beranda">
         <div>
@@ -11,8 +11,7 @@
         <div class="daftar-sekarang">
             <button type="button" class="btn btn-success">Daftar Sekarang</button>
         </div>
-  
-      </section>
+    </section>
 
   <!-- Program -->
     <section class="program-section bg-light" id="program">

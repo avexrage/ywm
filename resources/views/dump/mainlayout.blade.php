@@ -9,7 +9,7 @@
                 <i class="fa fa-user"></i> {{ Auth::user()->email }}
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li><a class="dropdown-item">Level: {{ Auth::user()->role }}</a></li>
+                <li><a class="dropdown-item">Riwayat</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="#"><i class="fa fa-power-off"></i> Log Out</a></li>
             </ul>

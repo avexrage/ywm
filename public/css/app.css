@@ -40,6 +40,11 @@ gap: 10px; /* Menambahkan jarak antar tombol */
 width: 120px; /* Atau gunakan min-width jika Anda ingin memastikan tombol tidak lebih kecil dari lebar tertentu tetapi bisa lebih besar jika isi teksnya membutuhkan */
 text-align: center; /* Membuat teks berada di tengah tombol */
 }
+
+.modal-backdrop.show {
+  backdrop-filter: blur(10px);
+}
+
 .fullscreen-image {
 width: 100%; /* Menjadikan lebar gambar penuh sesuai viewport */
 height: 100vh; /* Menyetel tinggi gambar sesuai tinggi viewport */
