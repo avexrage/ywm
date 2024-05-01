@@ -6,7 +6,7 @@
     <div class="col text-center d-flex align-items-center justify-content-center" style="font-size: 100px; height: 85vh; font-weight:400">
         Daftar
     </div>
-    <div class="col rounded-start-5 shadow-sm mb-4" style="height: 85vh; background-color: #EAFCE9">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-6  rounded-start-5 shadow-sm mb-4" style="height: 85vh; background-color: #EAFCE9">
         <div class="d-flex align-items-center justify-content-center h-100">
             <div class="w-50 rounded px-3 py-3" style="box-shadow: none; background-color: transparent">
                 <div>@include('layouts.pesan')</div>

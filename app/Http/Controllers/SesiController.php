@@ -31,22 +31,26 @@ class SesiController extends Controller
         
         $request->validate([
             'email' => 'required',
-            'password' => 'required'
+            'password' => 'required',
+            'captcha' => 'required'
             ],[
                 'email.required' => 'Email wajib diisi!',
-                'password.required' => 'Password wajib diisi!'
+                'password.required' => 'Password wajib diisi!',
+                'captcha.required' => 'Jawaban Captcha wajib diisi!'
             ]);
-        $infoLogin =[
-            'email' => $request->email,
-            'password' => $request->password
-        ];
 
-        if(Auth::attempt($infoLogin)){
+        if($request->captcha != session('captcha')){
+            return back()->withErrors(['captcha' => 'Jawaban Anda Salah'])->withInput();
+        }
+        
+        $credentials =$request->only('email', 'password');
+
+        if(Auth::attempt($credentials)){
             //otentikasi sukses
             return redirect('/')->with('success', Auth::user()->name . 'Selamat Anda Berhasil Login');
         }else{
             //otentikasi gagal
-            return redirect('sesi')->withErrors(['Email dan Password yang dimasukkan tidak valid']);
+            return redirect()->back()->withErrors(['Email dan Password yang dimasukkan tidak valid']);
         }
     }
 
